@@ -8,9 +8,9 @@ class Wavelet
 {
 	public:
 		virtual void test() = 0;
-		virtual void transform(char* src, char* dst, int iterations) = 0;
-		virtual void inverse(char* src, char* dst, int iterations) = 0;
-		void trim(char* src, int val);
+		virtual void transform(double* src, double* dst, int iterations) = 0;
+		virtual void inverse(double* src, double* dst, int iterations) = 0;
+		void trim(double* src, int val);
 		
 	private:
 		int width;

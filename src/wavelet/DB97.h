@@ -12,9 +12,9 @@ class DB97 : public Wavelet
 	public:
 		DB97(int width, int height);
 		void test();
-		void transformWaterfall(char* src, char* dst, int iterations);
-		void transform(char* src, char* dst, int iterations);
-		void inverse(char* src, char* dst, int iterations);
+		void transformWaterfall(double* src, double* dst, int iterations);
+		void transform(double* src, double* dst, int iterations);
+		void inverse(double* src, double* dst, int iterations);
 		
 	private:
 		int width;

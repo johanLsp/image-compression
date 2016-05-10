@@ -10,7 +10,7 @@ void Haar::test()
 {
 }
 
-void Haar::transform(char* src, char* dst, int iterations)
+void Haar::transform(double* src, double* dst, int iterations)
 {
 	int stepWidth = width;
 	int stepHeight = height;
@@ -81,7 +81,7 @@ void Haar::transform(char* src, char* dst, int iterations)
 
 
 
-void Haar::inverse(char* src, char* dst, int iterations)
+void Haar::inverse(double* src, double* dst, int iterations)
 {
 
 	double a, b;

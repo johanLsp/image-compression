@@ -1,6 +1,6 @@
 #include "Wavelet.h"
 
-void Trim(char* src, int val)
+void Trim(double* src, int val)
 {
 	for(int i = 0; i < width; i++)
 	{

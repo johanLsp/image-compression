@@ -13,8 +13,8 @@ class Haar : public Wavelet
 	public:
 		Haar(int width, int height);
 		void test();
-		void transform(char* src, char* dst, int iterations);
-		void inverse(char* src, char* dst, int iterations);
+		void transform(double* src, double* dst, int iterations);
+		void inverse(double* src, double* dst, int iterations);
 		
 	private:
 		int width;

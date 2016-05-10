@@ -29,7 +29,7 @@ void EZW::test()
 						  5,14,4,3,-2,5,-4,1};
 	*/					
 					
-	char wavelets3[width*height] = {0};
+	double wavelets3[width*height] = {0};
 	
 	wavelets3[0] = -128;
 	for(int i = 0; i < width*height ; i++)
@@ -45,7 +45,7 @@ void EZW::test()
 	encode(wavelets3, dst);
 	cout << endl;
 	
-	char output[1024] = {0};
+	double output[1024] = {0};
 	
 	
 	decode(dst, output);
@@ -55,13 +55,13 @@ void EZW::test()
 }
 
 
-void EZW::print(char* src)
+void EZW::print(double* src)
 {
 	for(int j = 0; j < height; j++)
 	{
 		for(int i = 0; i < width; i++)
 		{
-			cout << setw(3) << ((int)src[i+j*width]) << " ";
+			cout << setw(3) << src[i+j*width] << " ";
 		}
 		cout << endl;
 	}
@@ -80,7 +80,7 @@ void EZW::print(int* src)
 }
 
 
-void EZW::printChar(char* src)
+void EZW::print(char* src)
 {
 	for(int j = 0; j < height; j++)
 	{
@@ -131,34 +131,30 @@ void EZW::writeBit(char* dst, int pos, bool bit)
 
 
 
-int EZW::encode(char* src, char* dst)
+int EZW::encode(double* src, char* dst)
 {
 
 	int max_coef = 1;
 	
 	for(int i = 0; i < width*height; i++)
 	{
-		char v = src[i];
-		
+		//double v = src[i];
+	/*	
 		// Avoid dealing with overflow (v=-128 => -v = -128 !)
 		if (v == -128)
 		{
 			src[i]++;
 			v++;
-		}
-		if (abs(v) > max_coef) 
+		}*/
+		if (abs(src[i]) > max_coef) 
 			max_coef = abs(src[i]);
 	}
 	
 	int steps = floor(log2(max_coef));
-	unsigned char T = pow(2, steps);
-	dst[0] = static_cast<char>(T);
-	
-	
+	double T = pow(2, steps);
+	dst[0] = (unsigned char)T;
 	
 	int pos = 8;
-	
-	
 	
 
 	// Morton Scan
@@ -192,7 +188,7 @@ int EZW::encode(char* src, char* dst)
 
 	generateMortonIndices(index);
 
-	char map[width*height] = {0};
+	double map[width*height] = {0};
 	
 	
 	//print(index, width, height);
@@ -322,9 +318,9 @@ int EZW::encode(char* src, char* dst)
 }
 
 
-void EZW::decode(char* src, char* dst)
+void EZW::decode(char* src, double* dst)
 {
-	int T = (int)static_cast<unsigned char>(src[0]);
+	double T = (double)static_cast<unsigned char>(src[0]);
 	
 	int steps = log2(T);
 	
@@ -401,7 +397,7 @@ void EZW::generateMortonIndices(int* index)
 	}	
 }
 
-bool EZW::isZeroTree(char* src, int* index ,int T, int x)
+bool EZW::isZeroTree(double* src, int* index ,int T, int x)
 {
 	if (x == 0) return false;
 	
